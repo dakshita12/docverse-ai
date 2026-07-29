@@ -14,3 +14,12 @@ __pycache__/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Database
+data/database/*.db
+
+# Chroma Vector Store
+data/chroma_db/
+
+# Streamlit Cache
+.streamlit/
