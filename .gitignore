@@ -1,25 +1,35 @@
 # Virtual Environment
 venv/
+.venv/
 
-# Python cache
+# Python Cache
 __pycache__/
-*.pyc
+*.py[cod]
 
-# Environment variables
+# Environment Variables
 .env
 
 # IDE
 .vscode/
 
-# OS files
+# OS Files
 .DS_Store
 Thumbs.db
 
-# Database
-data/database/*.db
-
-# Chroma Vector Store
-data/chroma_db/
-
 # Streamlit Cache
 .streamlit/
+
+# SQLite Database
+data/database/*.db
+
+# Uploaded Documents
+data/uploads/*
+!data/uploads/.gitkeep
+
+# ChromaDB
+data/chroma_db/*
+!data/chroma_db/.gitkeep
+
+# Logs
+logs/*
+!logs/.gitkeep
