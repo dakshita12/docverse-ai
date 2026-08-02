@@ -1,4 +1,5 @@
 import streamlit as st
+from src.services.workspace_manager import save_uploaded_file
 
 st.title("📂 Workspace")
 
@@ -23,6 +24,11 @@ if uploaded_file is not None:
     st.write(f"**File Type:** {uploaded_file.type}")
     file_size_mb = uploaded_file.size / (1024 * 1024)
     st.write(f"**File Size:** {file_size_mb: .2f} MB")
+
+upload_button = st.button("📤 Upload Document")
+if upload_button:
+    save_uploaded_file(uploaded_file)
+    st.success("Document uploaded successfully")
 
 st.divider()
 
