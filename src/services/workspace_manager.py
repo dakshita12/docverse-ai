@@ -30,3 +30,16 @@ def get_uploaded_documents():
             documents.append(file.name)
 
     return documents
+
+
+def delete_document(filename):
+    """
+    Deletes a document from the uploads folder.
+    """
+    file_path = UPLOAD_FOLDER / filename
+
+    if file_path.exists():
+        file_path.unlink()
+        return True
+
+    return False

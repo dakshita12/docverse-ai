@@ -1,7 +1,8 @@
 import streamlit as st
 from src.services.workspace_manager import (
     save_uploaded_file,
-    get_uploaded_documents
+    get_uploaded_documents,
+    delete_document,
 )
 
 st.title("📂 Workspace")
@@ -40,6 +41,15 @@ documents = get_uploaded_documents()
 
 if documents:
     for document in documents:
-        st.write(f"📄 {document}")
+        col1, col2 = st.columns([5,1])
+        with col1:
+            st.write(f"📄 {document}")
+        with col2:
+            if st.button("🗑️ Delete", key=document):
+                if delete_document(document):
+                    st.success("f{document} deleted successfully!")
+                    st.rerun()
 else:
     st.info("No documents uploaded yet.")
+
+    
