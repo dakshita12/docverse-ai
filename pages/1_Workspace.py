@@ -31,8 +31,12 @@ if uploaded_file is not None:
 
 upload_button = st.button("📤 Upload Document")
 if upload_button:
-    save_uploaded_file(uploaded_file)
-    st.success("Document uploaded successfully")
+    if uploaded_file is not None:
+        save_uploaded_file(uploaded_file)
+        st.success("Document uploaded successfully")
+        st.rerun()
+    else:
+        st.warning("Please select a document first")
 
 st.divider()
 
@@ -47,9 +51,8 @@ if documents:
         with col2:
             if st.button("🗑️ Delete", key=document):
                 if delete_document(document):
-                    st.success("f{document} deleted successfully!")
+                    st.success(f"{document} deleted successfully!")
                     st.rerun()
 else:
     st.info("No documents uploaded yet.")
 
-    

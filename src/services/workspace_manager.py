@@ -43,3 +43,4 @@ def delete_document(filename):
         return True
 
     return False
+
