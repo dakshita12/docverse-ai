@@ -14,3 +14,19 @@ def save_uploaded_file(uploaded_file):
         file.write(uploaded_file.getbuffer())
 
     return True
+
+
+def get_uploaded_documents():
+    """
+    Returns a list of uploaded documents.
+    """
+    documents = []
+
+    if not UPLOAD_FOLDER.exists():
+        return documents
+
+    for file in UPLOAD_FOLDER.iterdir():
+        if file.is_file() and file.name != ".gitkeep":
+            documents.append(file.name)
+
+    return documents

@@ -1,5 +1,8 @@
 import streamlit as st
-from src.services.workspace_manager import save_uploaded_file
+from src.services.workspace_manager import (
+    save_uploaded_file,
+    get_uploaded_documents
+)
 
 st.title("📂 Workspace")
 
@@ -33,4 +36,10 @@ if upload_button:
 st.divider()
 
 st.header("📁 Uploaded Documents")
-st.info("No documents uploaded yet.")
+documents = get_uploaded_documents()
+
+if documents:
+    for document in documents:
+        st.write(f"📄 {document}")
+else:
+    st.info("No documents uploaded yet.")
