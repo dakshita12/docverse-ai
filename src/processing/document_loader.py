@@ -1,6 +1,7 @@
 import fitz
 from docx import Document
 from pptx import Presentation
+from src.processing.text_cleaner import clean_text
 
 def read_pdf(file_path):
     """
@@ -14,6 +15,7 @@ def read_pdf(file_path):
         text += page.get_text()
 
     document.close()
+    text = clean_text(text)
     return text
 
 
@@ -28,6 +30,7 @@ def read_docx(file_path):
     for paragraph in document.paragraphs:
         text += paragraph.text + "\n"
 
+    text = clean_text(text)
     return text
 
 
@@ -44,6 +47,7 @@ def read_pptx(file_path):
             if hasattr(shape, "text"):
                 text += shape.text + "\n"
 
+    text = clean_text(text)
     return text
 
 
