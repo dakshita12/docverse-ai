@@ -45,3 +45,32 @@ def read_pptx(file_path):
                 text += shape.text + "\n"
 
     return text
+
+
+def load_document(file_path):
+    """
+    Loads a document based on its file extension.
+    """
+
+    if not file_path.exists():
+        raise FileNotFoundError(f"File not found: {file_path}")
+
+    try:
+        extension = file_path.suffix.lower()
+
+        if extension == ".pdf":
+            return read_pdf(file_path)
+
+        elif extension == ".docx":
+            return read_docx(file_path)
+
+        elif extension == ".pptx":
+            return read_pptx(file_path)
+
+        raise ValueError(f"Unsupported file type: {extension}")
+
+    except (FileNotFoundError, ValueError):
+        raise 
+    
+    except Exception as e:
+        raise RuntimeError(f"Error loading document: {e}")
