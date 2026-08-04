@@ -1,7 +1,7 @@
 import fitz
 from docx import Document
 from pptx import Presentation
-from src.processing.text_cleaner import clean_text
+from src.processing.text_processing import clean_text
 
 def read_pdf(file_path):
     """
