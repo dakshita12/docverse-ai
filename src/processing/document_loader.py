@@ -1,7 +1,10 @@
 import fitz
 from docx import Document
 from pptx import Presentation
+from io import BytesIO
+from PIL import Image
 from src.processing.text_processing import clean_text
+from src.processing.ocr import OCRProcessor
 
 def read_pdf(file_path):
     """

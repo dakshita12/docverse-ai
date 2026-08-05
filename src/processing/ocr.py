@@ -22,7 +22,7 @@ class OCRProcessor:
         pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
 
 
-    def extract_text(self, image_path: str | Path) -> str:
+    def extract_text_from_file(self, image_path: str | Path) -> str:
         """
         Extract text from an image.
 
@@ -50,4 +50,29 @@ class OCRProcessor:
             logger.exception(f"OCR failed for image: {image_path}")
             raise RuntimeError(
                 f"Failed to extract text from {image_path}"
+            ) from e
+
+
+    def extract_text_from_image(self, image: Image.Image) -> str:
+        """
+        Extract text from a PIL Image object.
+
+        Args:
+            image: PIL Image object.
+
+        Returns:
+            Extracted text from the image.
+        """
+
+        logger.info("Extracting text from in-memory image.")
+
+        try:
+            text = pytesseract.image_to_string(image)
+            logger.info("Text extraction completed successfully.")
+            return text.strip()
+
+        except Exception as e:
+            logger.exception("OCR failed for in-memory image.")
+            raise RuntimeError(
+                "Failed to extract text from in-memory image."
             ) from e
