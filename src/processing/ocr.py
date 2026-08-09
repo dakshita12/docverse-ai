@@ -24,7 +24,7 @@ class OCRProcessor:
 
     def extract_text_from_file(self, image_path: str | Path) -> str:
         """
-        Extract text from an image.
+        Extract text from an image file.
 
         Args:
             image_path: Path to the image file.

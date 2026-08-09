@@ -12,10 +12,25 @@ def read_pdf(file_path):
     """
     document = fitz.open(file_path)
 
-    text = ""
+    ocr = OCRProcessor()
+
+    pages_text = []
 
     for page in document:
-        text += page.get_text()
+        page_text = page.get_text().strip()
+
+        if page_text:
+            pages_text.append(page_text)
+
+        else:
+            pixmap = page.get_pixmap()
+            img_bytes = pixmap.tobytes("png")
+            image_stream = BytesIO(img_bytes)
+            image = Image.open(image_stream)
+            page_text = ocr.extract_text_from_image(image)
+            pages_text.append(page_text)
+
+    text = "\n".join(pages_text)
 
     document.close()
     text = clean_text(text)
