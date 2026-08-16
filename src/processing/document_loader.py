@@ -7,6 +7,9 @@ from src.processing.text_processing import clean_text
 from src.processing.ocr import OCRProcessor
 
 
+MIN_TEXT_LENGTH = 50
+
+
 def should_use_ocr(text: str) -> bool:
     """
     Determines whether OCR should be used for a PDF page.
@@ -17,7 +20,7 @@ def should_use_ocr(text: str) -> bool:
     Returns:
         True if OCR is required, otherwise False.
     """
-    return not text.strip()
+    return len(text.strip()) < MIN_TEXT_LENGTH
 
 
 def read_pdf(file_path):
@@ -40,10 +43,8 @@ def read_pdf(file_path):
                 image_stream = BytesIO(img_bytes)
                 image = Image.open(image_stream)
                 page_text = ocr.extract_text_from_image(image)
-                pages_text.append(page_text)
-
-            else:
-                pages_text.append(page_text)
+            
+            pages_text.append(page_text)
 
     text = "\n".join(pages_text)
 
