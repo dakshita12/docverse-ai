@@ -1,3 +1,4 @@
+from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
@@ -14,7 +15,7 @@ text_splitter = RecursiveCharacterTextSplitter(
 
 def split_text(text: str) -> list[str]:
     """
-    Split cleaned text into overlapping chunks.
+    Split cleaned document text into overlapping chunks.
 
     Args:
         text: Cleaned document text.
@@ -27,3 +28,36 @@ def split_text(text: str) -> list[str]:
         return []
 
     return text_splitter.split_text(text)
+
+
+def create_chunk_documents(
+    text: str,
+    source: str
+) -> list[Document]:
+    """
+    Convert text chunks into LangChain Document objects with metadata.
+
+    Args:
+        text: Cleaned document text.
+        source: Source document name.
+
+    Returns:
+        A list of LangChain Document objects.
+    """
+
+    chunks = split_text(text)
+
+    documents = []
+
+    for chunk_id, chunk in enumerate(chunks):
+        document = Document(
+            page_content=chunk,
+            metadata={
+                "source": source,
+                "chunk_id": chunk_id,
+            },
+        )
+
+        documents.append(document)
+
+    return documents
