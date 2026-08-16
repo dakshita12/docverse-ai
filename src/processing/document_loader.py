@@ -6,33 +6,47 @@ from PIL import Image
 from src.processing.text_processing import clean_text
 from src.processing.ocr import OCRProcessor
 
+
+def should_use_ocr(text: str) -> bool:
+    """
+    Determines whether OCR should be used for a PDF page.
+
+    Args:
+        text: Text extracted from the PDF page.
+
+    Returns:
+        True if OCR is required, otherwise False.
+    """
+    return not text.strip()
+
+
 def read_pdf(file_path):
     """
     Reads a PDF file and returns its text.
     """
-    document = fitz.open(file_path)
 
     ocr = OCRProcessor()
 
     pages_text = []
 
-    for page in document:
-        page_text = page.get_text().strip()
+    with fitz.open(file_path) as document:
 
-        if page_text:
-            pages_text.append(page_text)
+        for page in document:
+            page_text = page.get_text().strip()
 
-        else:
-            pixmap = page.get_pixmap()
-            img_bytes = pixmap.tobytes("png")
-            image_stream = BytesIO(img_bytes)
-            image = Image.open(image_stream)
-            page_text = ocr.extract_text_from_image(image)
-            pages_text.append(page_text)
+            if should_use_ocr(page_text):
+                pixmap = page.get_pixmap()
+                img_bytes = pixmap.tobytes("png")
+                image_stream = BytesIO(img_bytes)
+                image = Image.open(image_stream)
+                page_text = ocr.extract_text_from_image(image)
+                pages_text.append(page_text)
+
+            else:
+                pages_text.append(page_text)
 
     text = "\n".join(pages_text)
 
-    document.close()
     text = clean_text(text)
     return text
 
