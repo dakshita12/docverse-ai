@@ -4,6 +4,7 @@ import chromadb
 class VectorStore:
     """Manage document embeddings using ChromaDB."""
 
+
     def __init__(
         self,
         persist_directory: str = "data/chroma_db",
@@ -14,6 +15,7 @@ class VectorStore:
         self.collection = self.client.get_or_create_collection(
             name=collection_name
         )
+
 
     def add_documents(
         self,
@@ -47,4 +49,28 @@ class VectorStore:
             embeddings=embeddings.tolist(),
             metadatas=metadatas,
             ids=ids,
+        )
+
+
+    def count(self) -> int:
+        """Return the number of stored chunks."""
+        return self.collection.count()
+    
+
+    def get_documents(self, limit: int = 10):
+        """Return stored documents and metadata."""
+        if limit <= 0:
+            raise ValueError("Limit must be greater than zero.")
+
+        return self.collection.get(limit=limit)
+    
+
+    def delete_by_document(self, document_id: str):
+        """Delete all chunks belonging to a document."""
+
+        if not document_id or not document_id.strip():
+            raise ValueError("Document ID cannot be empty.")
+
+        self.collection.delete(
+            where={"document_id": document_id}
         )
