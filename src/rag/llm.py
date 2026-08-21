@@ -12,18 +12,23 @@ llm = ChatGoogleGenerativeAI(
 def generate_response(prompt) -> str:
     """Generate a response from Gemini using the provided prompt."""
 
-    response = llm.invoke(prompt)
+    try:
+        response = llm.invoke(prompt)
 
-    if isinstance(response.content, str):
-        return response.content
+        if isinstance(response.content, str):
+            return response.content
 
-    if isinstance(response.content, list):
-        text_parts = []
+        if isinstance(response.content, list):
+            text_parts = []
 
-        for block in response.content:
-            if isinstance(block, dict) and block.get("type") == "text":
-                text_parts.append(block.get("text", ""))
+            for block in response.content:
+                if isinstance(block, dict) and block.get("type") == "text":
+                    text_parts.append(block.get("text", ""))
 
-        return "".join(text_parts)
+            return "".join(text_parts)
 
-    return str(response.content)
+        return str(response.content)
+
+    except Exception as e:
+        print(f"Gemini API error: {e}")
+        return "Sorry, I was unable to generate a response. Please try again."
