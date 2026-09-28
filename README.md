@@ -25,16 +25,16 @@ In addition to document-based AI chat, DocVerse AI provides dedicated study tool
                   └──────────┬───────────┘
                              │
                              ▼
-                  ┌──────────────────────┐
+                  ┌───────────────────────┐
                   │ Document Processing   │
                   │ Text Extraction / OCR │
                   │ Cleaning & Chunking   │
-                  └──────────┬───────────┘
+                  └──────────┬────────────┘
                              │
                              ▼
                   ┌──────────────────────┐
-                  │ Semantic Embeddings   │
-                  │ Sentence Transformers │
+                  │ Semantic Embeddings  │
+                  │ Sentence Transformers│
                   └──────────┬───────────┘
                              │
                              ▼
@@ -72,19 +72,19 @@ In addition to document-based AI chat, DocVerse AI provides dedicated study tool
 
 ## ✨ Key Features
 
-📄 **Multi-Format Document Support:** Upload and process PDF, DOCX, and PPTX study materials.
-🔍 **OCR for Scanned Documents:** Automatically use OCR when a PDF page contains insufficient extractable text.
-🧹 **Document Processing Pipeline:** Extract, clean, and split document content into manageable chunks for retrieval.
-🧠 **Semantic Embeddings:** Generate document embeddings using the all-MiniLM-L6-v2 Sentence Transformer model.
-🗄️ **Vector Storage with ChromaDB:** Store document embeddings and metadata in a persistent local vector database.
-🤖 **RAG-Based AI Chat:** Ask questions about uploaded study materials and receive responses based on retrieved document context.
-📚 **Document-Specific Chat:** Select a particular document when working with multiple uploaded study materials.
-📑 **AI Summary Generation:** Generate concise, exam-oriented summaries containing important concepts and key points.
-🗒️ **Smart Notes:** Convert study material into structured revision notes with headings and bullet points.
-🃏 **Flashcard Generation:** Generate question-and-answer flashcards based on the uploaded study material.
-📝 **MCQ Generation:** Generate multiple-choice questions with options, correct answers, and explanations.
-❓ **Important Question Generation:** Generate exam-oriented questions focused on important concepts, definitions, processes, comparisons, and technical topics.
-📖 **Multiple Document Support:** Upload and work with multiple study materials within the same workspace.
+- 📄 **Multi-Format Document Support:** Upload and process PDF, DOCX, and PPTX study materials.
+- 🔍 **OCR for Scanned Documents:** Automatically use OCR when a PDF page contains insufficient extractable text.
+- 🧹 **Document Processing Pipeline:** Extract, clean, and split document content into manageable chunks for retrieval.
+- 🧠 **Semantic Embeddings:** Generate document embeddings using the all-MiniLM-L6-v2 Sentence Transformer model.
+- 🗄️ **Vector Storage with ChromaDB:** Store document embeddings and metadata in a persistent local vector database.
+- 🤖 **RAG-Based AI Chat:** Ask questions about uploaded study materials and receive responses based on retrieved document context.
+- 📚 **Document-Specific Chat:** Select a particular document when working with multiple uploaded study materials.
+- 📑 **AI Summary Generation:** Generate concise, exam-oriented summaries containing important concepts and key points.
+- 🗒️ **Smart Notes:** Convert study material into structured revision notes with headings and bullet points.
+- 🃏 **Flashcard Generation:** Generate question-and-answer flashcards based on the uploaded study material.
+- 📝 **MCQ Generation:** Generate multiple-choice questions with options, correct answers, and explanations.
+- ❓ **Important Question Generation:** Generate exam-oriented questions focused on important concepts, definitions, processes, comparisons, and technical topics.
+- 📖 **Multiple Document Support:** Upload and work with multiple study materials within the same workspace.
 
 ---
 
@@ -257,5 +257,11 @@ AI-powered study workspace with RAG-based document chat, semantic retrieval, and
 `study-assistant`
 `document-chat` 
 `exam-preparation`
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
 
 ---
